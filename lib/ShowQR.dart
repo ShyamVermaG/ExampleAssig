@@ -41,7 +41,6 @@ class _MyShowQr extends State<ShowQR> {
 
   final ScreenshotController screenshotController=ScreenshotController();
   String id="155521212";
-
   String randomNumStr="sds";
 
   int logInHour=0;
@@ -71,6 +70,8 @@ class _MyShowQr extends State<ShowQR> {
       logInHour%=12;
     }
 
+  //for taking session data
+
     Future<void> getCheckData() async {
       id = (await _secureStorage.read(key: 'id'))!;
 
@@ -84,6 +85,7 @@ class _MyShowQr extends State<ShowQR> {
     }
 
 
+    //show message
   void _showSnackBar(BuildContext context, String message) {
     final snackBar = SnackBar(
       content: Text(message),
@@ -100,6 +102,8 @@ class _MyShowQr extends State<ShowQR> {
   }
 
 
+  //for storing image to database
+
   Future<void> saveQrImage() async {
       Uint8List? unit8list=await screenshotController.capture();
 
@@ -110,6 +114,7 @@ class _MyShowQr extends State<ShowQR> {
 
   }
 
+  // convert img to file
   Future<File> convertUint8ListToFile(Uint8List data, String fileName) async {
     final Directory tempDir = await getTemporaryDirectory();
     final File file = File('${tempDir.path}/$fileName');

@@ -117,6 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
+  //for taking city name
 
   Future<void> _getCityNameFromCoordinates(double latitude, double longitude) async {
     try {
@@ -133,6 +134,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
+  //for show message
+
   void _showSnackBar(BuildContext context, String message) {
     final snackBar = SnackBar(
       content: Text(message),
@@ -148,6 +151,8 @@ class _MyHomePageState extends State<MyHomePage> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+
+  //check user alredy login or not
   Future<void> checkLogIn() async {
     String? id = await _secureStorage.read(key: 'id');
 
@@ -162,19 +167,22 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  //store session data
   Future<void> storeDataLocaly() async {
     await _secureStorage.write(key: 'id', value: id);
     await _secureStorage.write(key: 'mob', value: mob);
   }
 
   
-  
+
+  //for testing
   void showData(){
     print("ip"+ipAddress!);
     print("location"+_locationMessage);
   }
 
 
+  //for taking current location
   Future<void> _getCurrentLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -217,6 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  //getting ip address
   Future<void> _getIPAddress() async {
     try {
       for (var interface in await NetworkInterface.list()) {
@@ -262,6 +271,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
+  //if user click first time then send otp else verify otp
   void LogInOrValidateOTP() async {
     if (!isLogin) {
 

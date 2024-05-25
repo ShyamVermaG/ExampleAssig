@@ -31,10 +31,10 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+  //default value init
   String id = "155521212";
   String mob = "155521212";
   final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
-
   // final DatabaseReference _databaseReference = FirebaseDatabase.instance.ref();
 
   final dbRef = FirebaseDatabase.instance.ref("userLogIn");
@@ -46,6 +46,7 @@ class _Home extends State<Home> {
     getCheckData();
   }
 
+  //for taking session data
   Future<void> getCheckData() async {
     id = (await _secureStorage.read(key: 'id'))!;
     mob = (await _secureStorage.read(key: 'mob'))!;
@@ -150,11 +151,13 @@ class _Home extends State<Home> {
 
               TextHeader(),
 
+
+              //get firebase data to the list
               //all the extra items will come here
               Expanded(
                 child: FirebaseAnimatedList(
-                    query: dbRef,
-                    defaultChild: Text("Loading"),
+                    query: dbRef.child("mob").equalTo(mob),
+                    defaultChild: Center(child:CircularProgressIndicator()),
                     itemBuilder: (context, snapshot, animation, index) {
                       // Map users=snapshot.value as Map;
                       // users['time']=snapshot.key;
